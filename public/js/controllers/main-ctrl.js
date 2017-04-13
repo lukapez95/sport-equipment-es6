@@ -27,10 +27,7 @@ class MainCtrl{
         $scope.displayItem = function () {
             $scope.shownItem = this.item;
         };
-    }
 
-    isActive (viewLocation) {
-        return viewLocation === this.$location.path();
     }
 
     setSportId (sport) {
@@ -39,19 +36,6 @@ class MainCtrl{
         this.$location.path('/sports/' + sport1);
     }
 
-    goToDetails (item) {
-        let itemColor = '';
-        let itemBrand = item.brand.split(' ').join('_');
-
-        if (item.color.indexOf(' ') >= 0) {
-            itemColor = item.color.split(' ').join('_');
-        } else {
-            itemColor = item.color.split('/').join('_');
-        }
-
-        let itemName = itemBrand + '_' + item.name.split(' ').join('_') + '_' + itemColor;
-        this.$location.path('/details/' + itemName + '/' + item.id);
-    }
 
     send () {
         location.reload();

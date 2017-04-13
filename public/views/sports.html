@@ -22,18 +22,11 @@
         </div>
     </div>
 
+
+
     <div id="allItems" ng-show="shownItem">
         <div ng-repeat="oneItem in shownItem.items" id="item">
-
-            <img ng-src="{{oneItem.imgs[0]}}" alt="{{oneItem.alt}}" ng-click="MainCtrl.goToDetails(oneItem)"/>
-            <br/>
-
-            <div id="textInfo">
-                <p>{{oneItem.name}}</p>
-                <p>{{oneItem.size}}</p>
-                <p>{{oneItem.brand}}</p>
-                <p>Price: {{oneItem.price | currency: "€" }}</p>
-            </div>
+            <items-component one="oneItem"></items-component>
         </div>
     </div>
 

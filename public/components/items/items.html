@@ -1,0 +1,9 @@
+<img ng-src="{{$ctrl.one.imgs[0]}}" alt="{{$ctrl.one.alt}}" ng-click="$ctrl.goToDetails($ctrl.one)"/>
+<br/>
+<div id="textInfo">
+    <p>{{$ctrl.one.name}}</p>
+    <p>{{$ctrl.one.size}}</p>
+    <p>{{$ctrl.one.brand}}</p>
+    <p>Price: {{$ctrl.one.price | currency: "€" }}</p>
+</div>
+

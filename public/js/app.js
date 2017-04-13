@@ -29,4 +29,8 @@ app.config(function($routeProvider){
 
 app.controller('MainCtrl', require('./controllers/main-ctrl'))
     .controller('DetailsCtrl', require('./controllers/details-ctrl'))
-    .service('dataService', require('./services/data-service'));
+    .controller('navbarController', require('../components/nav-bar/nav-bar.controller'))
+    .controller('itemsController', require('../components/items/items.controller'))
+    .service('dataService', require('./services/data-service'))
+    .component('navbarComponent', require('../components/nav-bar/nav-bar.component'))
+    .component('itemsComponent', require('../components/items/items.component'));

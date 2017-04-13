@@ -5,12 +5,26 @@ webpackJsonp([0],[
 "use strict";
 
 
-__webpack_require__(5);
+__webpack_require__(6);
 module.exports = 'ngRoute';
 
 /***/ }),
 /* 1 */,
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var navbarComponent = {
+    templateUrl: './components/nav-bar/nav-bar.html',
+    controller: 'navbarController'
+};
+
+module.exports = navbarComponent;
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73,7 +87,7 @@ DetailsCtrl.$inject = ['$scope', '$routeParams', '$location', 'dataService'];
 module.exports = DetailsCtrl;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -114,31 +128,11 @@ var MainCtrl = function () {
     }
 
     _createClass(MainCtrl, [{
-        key: 'isActive',
-        value: function isActive(viewLocation) {
-            return viewLocation === this.$location.path();
-        }
-    }, {
         key: 'setSportId',
         value: function setSportId(sport) {
             var sport1 = sport.title.toLowerCase();
             this.$scope.sportId = sport.sportId;
             this.$location.path('/sports/' + sport1);
-        }
-    }, {
-        key: 'goToDetails',
-        value: function goToDetails(item) {
-            var itemColor = '';
-            var itemBrand = item.brand.split(' ').join('_');
-
-            if (item.color.indexOf(' ') >= 0) {
-                itemColor = item.color.split(' ').join('_');
-            } else {
-                itemColor = item.color.split('/').join('_');
-            }
-
-            var itemName = itemBrand + '_' + item.name.split(' ').join('_') + '_' + itemColor;
-            this.$location.path('/details/' + itemName + '/' + item.id);
         }
     }, {
         key: 'send',
@@ -154,7 +148,7 @@ MainCtrl.$inject = ['$scope', '$routeParams', '$location', 'dataService'];
 module.exports = MainCtrl;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -205,7 +199,7 @@ dataService.$inject = ['$http'];
 module.exports = dataService;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1392,8 +1386,8 @@ module.exports = dataService;
 })(window, window.angular);
 
 /***/ }),
-/* 6 */,
-/* 7 */
+/* 7 */,
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1423,7 +1417,116 @@ app.config(function ($routeProvider) {
     });
 });
 
-app.controller('MainCtrl', __webpack_require__(3)).controller('DetailsCtrl', __webpack_require__(2)).service('dataService', __webpack_require__(4));
+app.controller('MainCtrl', __webpack_require__(4)).controller('DetailsCtrl', __webpack_require__(3)).controller('navbarController', __webpack_require__(10)).controller('itemsController', __webpack_require__(14)).service('dataService', __webpack_require__(5)).component('navbarComponent', __webpack_require__(2)).component('itemsComponent', __webpack_require__(13));
+
+/***/ }),
+/* 9 */,
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var navbarController = function () {
+    function navbarController($location, dataService) {
+        var _this = this;
+
+        _classCallCheck(this, navbarController);
+
+        this.$location = $location;
+        this.dataService = dataService;
+        this.allData = {};
+
+        dataService.getData().then(function (data) {
+            _this.allData = data.data;
+        }).catch(function (e) {
+            console.log(e);
+        });
+    }
+
+    _createClass(navbarController, [{
+        key: 'setSportId',
+        value: function setSportId(sport) {
+            var sport1 = sport.title.toLowerCase();
+            this.sportId = sport.sportId;
+            this.$location.path('/sports/' + sport1);
+        }
+    }, {
+        key: 'isActive',
+        value: function isActive(viewLocation) {
+            return viewLocation === this.$location.path();
+        }
+    }]);
+
+    return navbarController;
+}();
+
+navbarController.$inject = ['$location', 'dataService'];
+module.exports = navbarController;
+
+/***/ }),
+/* 11 */,
+/* 12 */,
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var itemsComponent = {
+    templateUrl: './components/items/items.html',
+    controller: 'itemsController',
+    bindings: {
+        one: '='
+    }
+};
+
+module.exports = itemsComponent;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var itemsController = function () {
+    function itemsController($location) {
+        _classCallCheck(this, itemsController);
+
+        this.$location = $location;
+    }
+
+    _createClass(itemsController, [{
+        key: 'goToDetails',
+        value: function goToDetails(item) {
+            var itemColor = '';
+            var itemBrand = item.brand.split(' ').join('_');
+
+            if (item.color.indexOf(' ') >= 0) {
+                itemColor = item.color.split(' ').join('_');
+            } else {
+                itemColor = item.color.split('/').join('_');
+            }
+
+            var itemName = itemBrand + '_' + item.name.split(' ').join('_') + '_' + itemColor;
+            this.$location.path('/details/' + itemName + '/' + item.id);
+        }
+    }]);
+
+    return itemsController;
+}();
+
+itemsController.$inject = ['$location'];
+module.exports = itemsController;
 
 /***/ })
-],[7]);
+],[8]);
