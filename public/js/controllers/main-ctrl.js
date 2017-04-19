@@ -8,7 +8,6 @@ class MainCtrl{
         this.$location = $location;
         this.dataService = dataService;
 
-        $scope.allData = {};
         $scope.myVal = true;
         $scope.sportId = '';
         $scope.sportTitle = $routeParams.sportTitle;
@@ -24,10 +23,6 @@ class MainCtrl{
             this.myVal = !this.myVal;
         };
 
-        $scope.displayItem = function () {
-            $scope.shownItem = this.item;
-        };
-
     }
 
     setSportId (sport) {
@@ -36,6 +31,13 @@ class MainCtrl{
         this.$location.path('/sports/' + sport1);
     }
 
+    isActive (viewLocation) {
+        return viewLocation === this.$location.path();
+    }
+
+    displayItem (item) {
+        this.$scope.shownItem = item;
+    }
 
     send () {
         location.reload();

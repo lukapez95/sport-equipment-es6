@@ -2,24 +2,15 @@
 
 class itemsController{
 
-    constructor($location) {
+    constructor($location, dataService) {
         this.$location = $location;
+        this.dataService = dataService;
     }
 
-    goToDetails (item) {
-        let itemColor = '';
-        let itemBrand = item.brand.split(' ').join('_');
-
-        if (item.color.indexOf(' ') >= 0) {
-            itemColor = item.color.split(' ').join('_');
-        } else {
-            itemColor = item.color.split('/').join('_');
-        }
-
-        let itemName = itemBrand + '_' + item.name.split(' ').join('_') + '_' + itemColor;
-        this.$location.path('/details/' + itemName + '/' + item.id);
+    goToDetails(one) {
+        this.dataService.changeDetailsUrl(one);
     }
 }
 
-itemsController.$inject = ['$location'];
+itemsController.$inject = ['$location', 'dataService'];
 module.exports = itemsController;

@@ -7,7 +7,7 @@
                 </a>
                 <ul class="list-group" ng-hide="myVal">
                     <li ng-repeat="item in cat.subCategories" >
-                        <a class="list-group-item" href="" ng-click="displayItem(item)">
+                        <a class="list-group-item" href="" ng-click="MainCtrl.displayItem(item)">
                             {{item.subCategoryTitle}}
                         </a>
                     </li>
@@ -23,27 +23,12 @@
     </div>
 
 
-
     <div id="allItems" ng-show="shownItem">
         <div ng-repeat="oneItem in shownItem.items" id="item">
             <items-component one="oneItem"></items-component>
         </div>
     </div>
 
-    <div id="footer"  ng-show="shownItem">
-        <div id="footerNav">
-            <div id="footerInfo" ng-repeat="sport in allData.sports">
-                <a href="" class="navbar-link" ng-click="MainCtrl.setSportId(sport)">{{sport.title}}</a>
-            </div>
-            <div id="footerInfo">
-                <a class="navbar-link" href="#!/contact">Contact</a>
-            </div>
-        </div>
-        <hr>
-        <div id="footerEmail">
-            <p>Contact me luka95.pezerovic@gmail.com</p>
-        </div>
-    </div>
-
+    <footer-component ng-show="shownItem"></footer-component>
 
 </div>

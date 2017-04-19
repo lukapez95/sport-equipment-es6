@@ -25,18 +25,8 @@ class DetailsCtrl {
         this.$scope.selected = index;
     }
 
-    goToDetails (color){
-        this.dataService.getItemById(color.id).then( (item) => {
-            let itemColor = '';
-            let itemBrand = item.data.brand.split(' ').join('_');
-            if (item.data.color.indexOf(' ') >= 0) {
-                itemColor = item.data.color.split(' ').join('_');
-            } else {
-                itemColor = item.data.color.split('/').join('_');
-            }
-            let itemName = itemBrand + '_' + item.data.name.split(' ').join('_') + '_' + itemColor;
-            this.$location.url('/details/' + itemName + '/' + item.data.id);
-        })
+    changeDetailItem(id) {
+        this.dataService.changeDetailsUrl(id);
     }
 
 }
