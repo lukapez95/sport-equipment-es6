@@ -11,4 +11,7 @@ Sport equipment
 
 
 ## Development
-`$ npm start` to  start the app on 127.0.0.1:8000
+`$ npm build` to build webpack, `$ npm start` to start the app on 127.0.0.1:3000
+
+## Test
+`$ npm test` to run test with karma
