@@ -21,7 +21,6 @@ module.exports = function(config) {
           'node_modules/angular-mocks/angular-mocks.js',
           'public/vendor.bundle.js',
           'public/app.bundle.js',
-          'public/components/nav-bar/nav-bar.spec.js',
           'public/components/items/items.spec.js'
       ],
 

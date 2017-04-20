@@ -16,6 +16,21 @@ module.exports = 'ngRoute';
 "use strict";
 
 
+var footerComponent = {
+    templateUrl: './components/footer/footer.html',
+    controller: 'MainCtrl',
+    controllerAs: 'MainCtrl'
+};
+
+module.exports = footerComponent;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var itemsComponent = {
     templateUrl: './components/items/items.html',
     controller: 'itemsController',
@@ -27,7 +42,7 @@ var itemsComponent = {
 module.exports = itemsComponent;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59,7 +74,7 @@ itemsController.$inject = ['$location', 'dataService'];
 module.exports = itemsController;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74,7 +89,6 @@ var navbarComponent = {
 module.exports = navbarComponent;
 
 /***/ }),
-/* 5 */,
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -97,12 +111,21 @@ var DetailsCtrl = function () {
         $scope.current = 0;
         $scope.selected = 0;
 
-        dataService.getItemById($routeParams.id).then(function (item) {
-            $scope.itemDetail = item.data;
-        });
+        this.$scope.itemDetail = {};
+        this.setItemId();
     }
 
     _createClass(DetailsCtrl, [{
+        key: 'setItemId',
+        value: function setItemId() {
+            var _this = this;
+
+            return this.dataService.getItemById(this.$routeParams.id).then(function (item) {
+                _this.$scope.itemDetail = item.data;
+                return _this.$scope.itemDetail;
+            });
+        }
+    }, {
         key: 'setCurrent',
         value: function setCurrent(index) {
             this.$scope.current = index || 0;
@@ -145,23 +168,30 @@ var MainCtrl = function () {
         this.$location = $location;
         this.dataService = dataService;
 
-        $scope.myVal = true;
+        this.clicked = -1;
+        this.$scope.allData = {};
+        this.setData();
+
         $scope.sportId = '';
         $scope.sportTitle = $routeParams.sportTitle;
-
-        dataService.getData().then(function (data) {
-            $scope.allData = {};
-            $scope.allData = data.data;
-        }).catch(function (e) {
-            console.log(e);
-        });
-
-        $scope.setCurrent = function () {
-            this.myVal = !this.myVal;
-        };
     }
 
     _createClass(MainCtrl, [{
+        key: 'setCurrent',
+        value: function setCurrent(index) {
+            index === this.clicked ? this.clicked = -1 : this.clicked = index;
+        }
+    }, {
+        key: 'setData',
+        value: function setData() {
+            var _this = this;
+
+            return this.dataService.getData().then(function (data) {
+                _this.$scope.allData = data.data;
+                return _this.$scope.allData;
+            });
+        }
+    }, {
         key: 'setSportId',
         value: function setSportId(sport) {
             var sport1 = sport.title.toLowerCase();
@@ -216,13 +246,9 @@ var dataService = function () {
             var _this = this;
 
             this.getItemById(id).then(function (item) {
-                var itemColor = '';
+                var itemColor = void 0;
                 var itemBrand = item.data.brand.split(' ').join('_');
-                if (item.data.color.indexOf(' ') >= 0) {
-                    itemColor = item.data.color.split(' ').join('_');
-                } else {
-                    itemColor = item.data.color.split('/').join('_');
-                }
+                item.data.color.indexOf(' ') >= 0 ? itemColor = item.data.color.split(' ').join('_') : itemColor = item.data.color.split('/').join('_');
                 var itemName = itemBrand + '_' + item.data.name.split(' ').join('_') + '_' + itemColor;
                 _this.$location.url('/details/' + itemName + '/' + item.data.id);
             });
@@ -244,9 +270,7 @@ var dataService = function () {
                 for (var j = 0; j < data.sports[i].categories.length; j++) {
                     for (var k = 0; k < data.sports[i].categories[j].subCategories.length; k++) {
                         for (var l = 0; l < data.sports[i].categories[j].subCategories[k].items.length; l++) {
-                            if (data.sports[i].categories[j].subCategories[k].items[l].id === id) {
-                                return data.sports[i].categories[j].subCategories[k].items[l];
-                            }
+                            if (data.sports[i].categories[j].subCategories[k].items[l].id === id) return data.sports[i].categories[j].subCategories[k].items[l];
                         }
                     }
                 }
@@ -1479,23 +1503,7 @@ app.config(function ($routeProvider) {
     });
 });
 
-app.controller('MainCtrl', __webpack_require__(7)).controller('DetailsCtrl', __webpack_require__(6)).controller('itemsController', __webpack_require__(3)).service('dataService', __webpack_require__(8)).component('navbarComponent', __webpack_require__(4)).component('itemsComponent', __webpack_require__(2)).component('footerComponent', __webpack_require__(13));
-
-/***/ }),
-/* 12 */,
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var footerComponent = {
-    templateUrl: './components/footer/footer.html',
-    controller: 'MainCtrl',
-    controllerAs: 'MainCtrl'
-};
-
-module.exports = footerComponent;
+app.controller('MainCtrl', __webpack_require__(7)).controller('DetailsCtrl', __webpack_require__(6)).controller('itemsController', __webpack_require__(4)).service('dataService', __webpack_require__(8)).component('navbarComponent', __webpack_require__(5)).component('itemsComponent', __webpack_require__(3)).component('footerComponent', __webpack_require__(2));
 
 /***/ })
 ],[11]);

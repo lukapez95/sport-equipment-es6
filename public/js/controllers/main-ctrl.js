@@ -8,27 +8,30 @@ class MainCtrl{
         this.$location = $location;
         this.dataService = dataService;
 
-        $scope.myVal = true;
+        this.clicked = -1;
+        this.$scope.allData = {};
+        this.setData();
+
         $scope.sportId = '';
         $scope.sportTitle = $routeParams.sportTitle;
 
-        dataService.getData().then(function (data) {
-            $scope.allData = {};
-            $scope.allData = data.data;
-        }).catch(function(e) {
-            console.log(e);
-        });
+    }
 
-        $scope.setCurrent = function () {
-            this.myVal = !this.myVal;
-        };
+    setCurrent (index) {
+        index === this.clicked ? this.clicked = -1 : this.clicked = index;
+    }
 
+    setData () {
+        return this.dataService.getData().then((data)=>{
+            this.$scope.allData = data.data;
+            return this.$scope.allData;
+        })
     }
 
     setSportId (sport) {
         let sport1 = sport.title.toLowerCase();
         this.$scope.sportId = sport.sportId;
-        this.$location.path('/sports/' + sport1);
+        this.$location.path(`/sports/${sport1}`);
     }
 
     isActive (viewLocation) {

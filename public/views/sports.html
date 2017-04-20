@@ -2,11 +2,11 @@
     <div class="col-md-2" ng-repeat="category in allData.sports | filter: {title:sportTitle}">
         <ul class="list-group" ng-repeat="cat in category.categories">
             <li>
-                <a class="list-group-item" href="" ng-click="setCurrent(cat.categoryTitle)" ng-class="{'selected': myVal == false}">
+                <a class="list-group-item" href="" ng-click="MainCtrl.setCurrent($index)" ng-class="{'selected': $index == MainCtrl.clicked}">
                     {{cat.categoryTitle}}
                 </a>
-                <ul class="list-group" ng-hide="myVal">
-                    <li ng-repeat="item in cat.subCategories" >
+                <ul class="list-group" ng-show="$index == MainCtrl.clicked">
+                        <li ng-repeat="item in cat.subCategories">
                         <a class="list-group-item" href="" ng-click="MainCtrl.displayItem(item)">
                             {{item.subCategoryTitle}}
                         </a>

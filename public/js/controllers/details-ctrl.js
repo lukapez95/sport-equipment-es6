@@ -11,10 +11,15 @@ class DetailsCtrl {
         $scope.current = 0;
         $scope.selected = 0;
 
-        dataService.getItemById($routeParams.id).then(function(item) {
-            $scope.itemDetail = item.data;
-        });
+        this.$scope.itemDetail = {};
+        this.setItemId();
+    }
 
+    setItemId () {
+        return this.dataService.getItemById(this.$routeParams.id).then((item) => {
+            this.$scope.itemDetail = item.data;
+            return this.$scope.itemDetail;
+        })
     }
 
     setCurrent (index){
