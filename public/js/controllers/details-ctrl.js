@@ -8,11 +8,11 @@ class DetailsCtrl {
         this.$location = $location;
         this.dataService = dataService;
 
-        $scope.current = 0;
-        $scope.selected = 0;
-
         this.$scope.itemDetail = {};
         this.setItemId();
+
+        $scope.current = 0;
+        $scope.selected = 0;
     }
 
     setItemId () {

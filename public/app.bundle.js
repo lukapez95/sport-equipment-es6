@@ -108,11 +108,11 @@ var DetailsCtrl = function () {
         this.$location = $location;
         this.dataService = dataService;
 
-        $scope.current = 0;
-        $scope.selected = 0;
-
         this.$scope.itemDetail = {};
         this.setItemId();
+
+        $scope.current = 0;
+        $scope.selected = 0;
     }
 
     _createClass(DetailsCtrl, [{
@@ -168,7 +168,7 @@ var MainCtrl = function () {
         this.$location = $location;
         this.dataService = dataService;
 
-        this.clicked = -1;
+        this.clicked = null;
         this.$scope.allData = {};
         this.setData();
 

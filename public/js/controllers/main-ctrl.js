@@ -8,7 +8,7 @@ class MainCtrl{
         this.$location = $location;
         this.dataService = dataService;
 
-        this.clicked = -1;
+        this.clicked = null;
         this.$scope.allData = {};
         this.setData();
 
