@@ -3,10 +3,10 @@
         <a class="navbar-brand" href="/"><div class="navbar-header"><img ng-src="imgs/logo.jpg" alt=""/></div></a>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right" id="nav-ul">
-                <li ng-repeat="sport in allData.sports" ng-class="{ active: MainCtrl.isActive('{{'/sports/' + sport.title | lowercase}}')}" >
-                    <a href="" ng-click="MainCtrl.setSportId(sport)">{{sport.title}}</a>
+                <li ng-repeat="sport in $ctrl.allData.sports" ng-class="{ active: $ctrl.isActive('{{'/sports/' + sport.title | lowercase}}')}" >
+                    <a href="" ng-click="$ctrl.setSportId(sport)">{{sport.title}}</a>
                 </li>
-                <li ng-class="{ active: MainCtrl.isActive('/contact')}">
+                <li ng-class="{ active: $ctrl.isActive('/contact')}">
                     <a href="#!/contact">Contact</a>
                 </li>
             </ul>

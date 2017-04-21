@@ -1,7 +1,7 @@
 <div id="footer">
     <div id="footerNav">
-        <div id="footerInfo" ng-repeat="sport in allData.sports">
-            <a href="" class="navbar-link" ng-click="MainCtrl.setSportId(sport)">{{sport.title}}</a>
+        <div id="footerInfo" ng-repeat="sport in $ctrl.allData.sports">
+            <a href="" class="navbar-link" ng-click="$ctrl.setSportId(sport)">{{sport.title}}</a>
         </div>
         <div id="footerInfo">
             <a class="navbar-link" href="#!/contact">Contact</a>

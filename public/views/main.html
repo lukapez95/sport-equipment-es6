@@ -1,9 +1,9 @@
 <div id="mainPage">
-    <div id="mainInfo" ng-repeat="sport in allData.sports">
+    <div id="mainInfo" ng-repeat="sport in ctrl.allData.sports">
         <div>
             <img style="border-radius: 5px;" ng-src="{{sport.mainImg}}" alt="{{sport.alt}}"/>
         </div>
-        <a ng-click="MainCtrl.setSportId(sport)" type="button" class="btn btn-success btn-xs btn-block"><h5>{{sport.title}} - Shop now</h5></a>
+        <a ng-click="ctrl.setSportId(sport)" type="button" class="btn btn-success btn-xs btn-block"><h5>{{sport.title}} - Shop now</h5></a>
     </div>
 </div>
 

@@ -26,7 +26,7 @@ class dataService{
     }
 
 
-    static findInJsonById(data, id){
+    findInJsonById(data, id){
         for(let i = 0; i < data.sports.length; i++) {
             for(let j = 0; j < data.sports[i].categories.length; j++) {
                 for(let k = 0; k < data.sports[i].categories[j].subCategories.length; k++) {

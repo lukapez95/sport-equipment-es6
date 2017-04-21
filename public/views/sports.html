@@ -1,13 +1,13 @@
 <div class="row">
-    <div class="col-md-2" ng-repeat="category in allData.sports | filter: {title:sportTitle}">
+    <div class="col-md-2" ng-repeat="category in ctrl.allData.sports | filter: {title:ctrl.sportTitle}">
         <ul class="list-group" ng-repeat="cat in category.categories">
             <li>
-                <a class="list-group-item" href="" ng-click="MainCtrl.setCurrent($index)" ng-class="{'selected': $index == MainCtrl.clicked}">
+                <a class="list-group-item" href="" ng-click="ctrl.setCurrent($index)" ng-class="{'selected': $index == ctrl.clicked}">
                     {{cat.categoryTitle}}
                 </a>
-                <ul class="list-group" ng-show="$index == MainCtrl.clicked">
+                <ul class="list-group" ng-show="$index == ctrl.clicked">
                         <li ng-repeat="item in cat.subCategories">
-                        <a class="list-group-item" href="" ng-click="MainCtrl.displayItem(item)">
+                        <a class="list-group-item" href="" ng-click="ctrl.displayItem(item)">
                             {{item.subCategoryTitle}}
                         </a>
                     </li>
@@ -16,19 +16,19 @@
         </ul>
     </div>
 
-    <div class="col-md-10" ng-show="!shownItem">
+    <div class="col-md-10" ng-show="!ctrl.shownItem">
         <div>
             <h2 style="text-align:center;">Please select category</h2>
         </div>
     </div>
 
 
-    <div id="allItems" ng-show="shownItem">
-        <div ng-repeat="oneItem in shownItem.items" id="item">
+    <div id="allItems" ng-show="ctrl.shownItem">
+        <div ng-repeat="oneItem in ctrl.shownItem.items" id="item">
             <items-component one="oneItem"></items-component>
         </div>
     </div>
 
-    <footer-component ng-show="shownItem"></footer-component>
+    <footer-component ng-show="ctrl.shownItem"></footer-component>
 
 </div>

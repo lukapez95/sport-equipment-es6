@@ -2,20 +2,18 @@
 
 class MainCtrl{
 
-    constructor($scope, $routeParams, $location, dataService) {
-        this.$scope = $scope;
+    constructor($routeParams, $location, dataService) {
         this.$routeParams = $routeParams;
         this.$location = $location;
         this.dataService = dataService;
 
         this.clicked = null;
-        this.$scope.allData = {};
+        this.allData = {};
         this.setData();
-
-        $scope.sportId = '';
-        $scope.sportTitle = $routeParams.sportTitle;
+        this.sportTitle = $routeParams.sportTitle;
 
     }
+
 
     setCurrent (index) {
         index === this.clicked ? this.clicked = -1 : this.clicked = index;
@@ -23,14 +21,13 @@ class MainCtrl{
 
     setData () {
         return this.dataService.getData().then((data)=>{
-            this.$scope.allData = data.data;
-            return this.$scope.allData;
+            this.allData = data.data;
+            return this.allData;
         })
     }
 
     setSportId (sport) {
         let sport1 = sport.title.toLowerCase();
-        this.$scope.sportId = sport.sportId;
         this.$location.path(`/sports/${sport1}`);
     }
 
@@ -39,7 +36,7 @@ class MainCtrl{
     }
 
     displayItem (item) {
-        this.$scope.shownItem = item;
+        this.shownItem = item;
     }
 
     send () {
@@ -47,5 +44,5 @@ class MainCtrl{
     }
 }
 
-MainCtrl.$inject =  ['$scope', '$routeParams', '$location', 'dataService'];
+MainCtrl.$inject =  ['$routeParams', '$location', 'dataService'];
 module.exports = MainCtrl;

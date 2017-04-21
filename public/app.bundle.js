@@ -18,8 +18,7 @@ module.exports = 'ngRoute';
 
 var footerComponent = {
     templateUrl: './components/footer/footer.html',
-    controller: 'MainCtrl',
-    controllerAs: 'MainCtrl'
+    controller: 'MainCtrl'
 };
 
 module.exports = footerComponent;
@@ -53,10 +52,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var itemsController = function () {
-    function itemsController($location, dataService) {
+    function itemsController(dataService) {
         _classCallCheck(this, itemsController);
 
-        this.$location = $location;
         this.dataService = dataService;
     }
 
@@ -70,7 +68,7 @@ var itemsController = function () {
     return itemsController;
 }();
 
-itemsController.$inject = ['$location', 'dataService'];
+itemsController.$inject = ['dataService'];
 module.exports = itemsController;
 
 /***/ }),
@@ -82,8 +80,7 @@ module.exports = itemsController;
 
 var navbarComponent = {
     templateUrl: './components/nav-bar/nav-bar.html',
-    controller: 'MainCtrl',
-    controllerAs: 'MainCtrl'
+    controller: 'MainCtrl'
 };
 
 module.exports = navbarComponent;
@@ -100,19 +97,18 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var DetailsCtrl = function () {
-    function DetailsCtrl($scope, $routeParams, $location, dataService) {
+    function DetailsCtrl($routeParams, $location, dataService) {
         _classCallCheck(this, DetailsCtrl);
 
-        this.$scope = $scope;
         this.$routeParams = $routeParams;
         this.$location = $location;
         this.dataService = dataService;
 
-        this.$scope.itemDetail = {};
+        this.itemDetail = {};
         this.setItemId();
 
-        $scope.current = 0;
-        $scope.selected = 0;
+        this.current = 0;
+        this.selected = 0;
     }
 
     _createClass(DetailsCtrl, [{
@@ -121,19 +117,19 @@ var DetailsCtrl = function () {
             var _this = this;
 
             return this.dataService.getItemById(this.$routeParams.id).then(function (item) {
-                _this.$scope.itemDetail = item.data;
-                return _this.$scope.itemDetail;
+                _this.itemDetail = item.data;
+                return _this.itemDetail;
             });
         }
     }, {
         key: 'setCurrent',
         value: function setCurrent(index) {
-            this.$scope.current = index || 0;
+            this.current = index || 0;
         }
     }, {
         key: 'select',
         value: function select(index) {
-            this.$scope.selected = index;
+            this.selected = index;
         }
     }, {
         key: 'changeDetailItem',
@@ -145,7 +141,7 @@ var DetailsCtrl = function () {
     return DetailsCtrl;
 }();
 
-DetailsCtrl.$inject = ['$scope', '$routeParams', '$location', 'dataService'];
+DetailsCtrl.$inject = ['$routeParams', '$location', 'dataService'];
 module.exports = DetailsCtrl;
 
 /***/ }),
@@ -160,20 +156,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var MainCtrl = function () {
-    function MainCtrl($scope, $routeParams, $location, dataService) {
+    function MainCtrl($routeParams, $location, dataService) {
         _classCallCheck(this, MainCtrl);
 
-        this.$scope = $scope;
         this.$routeParams = $routeParams;
         this.$location = $location;
         this.dataService = dataService;
 
         this.clicked = null;
-        this.$scope.allData = {};
+        this.allData = {};
         this.setData();
-
-        $scope.sportId = '';
-        $scope.sportTitle = $routeParams.sportTitle;
+        this.sportTitle = $routeParams.sportTitle;
     }
 
     _createClass(MainCtrl, [{
@@ -187,15 +180,14 @@ var MainCtrl = function () {
             var _this = this;
 
             return this.dataService.getData().then(function (data) {
-                _this.$scope.allData = data.data;
-                return _this.$scope.allData;
+                _this.allData = data.data;
+                return _this.allData;
             });
         }
     }, {
         key: 'setSportId',
         value: function setSportId(sport) {
             var sport1 = sport.title.toLowerCase();
-            this.$scope.sportId = sport.sportId;
             this.$location.path('/sports/' + sport1);
         }
     }, {
@@ -206,7 +198,7 @@ var MainCtrl = function () {
     }, {
         key: 'displayItem',
         value: function displayItem(item) {
-            this.$scope.shownItem = item;
+            this.shownItem = item;
         }
     }, {
         key: 'send',
@@ -218,7 +210,7 @@ var MainCtrl = function () {
     return MainCtrl;
 }();
 
-MainCtrl.$inject = ['$scope', '$routeParams', '$location', 'dataService'];
+MainCtrl.$inject = ['$routeParams', '$location', 'dataService'];
 module.exports = MainCtrl;
 
 /***/ }),
@@ -263,7 +255,7 @@ var dataService = function () {
         value: function getItemById(id) {
             return this.$http.get('/api/item/' + id);
         }
-    }], [{
+    }, {
         key: 'findInJsonById',
         value: function findInJsonById(data, id) {
             for (var i = 0; i < data.sports.length; i++) {
@@ -1485,19 +1477,19 @@ app.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'MainCtrl'
+        controllerAs: 'ctrl'
     }).when('/sports/:sportTitle', {
         templateUrl: 'views/sports.html',
         controller: 'MainCtrl',
-        controllerAs: 'MainCtrl'
+        controllerAs: 'ctrl'
     }).when('/contact', {
         templateUrl: 'views/contact.html',
         controller: 'MainCtrl',
-        controllerAs: 'MainCtrl'
+        controllerAs: 'ctrl'
     }).when('/details/:path/:id', {
         templateUrl: 'views/details.html',
         controller: 'DetailsCtrl',
-        controllerAs: 'DetailsCtrl'
+        controllerAs: 'ctrl'
     }).otherwise({
         redirectTo: '/'
     });

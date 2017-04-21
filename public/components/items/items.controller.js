@@ -2,8 +2,7 @@
 
 class itemsController{
 
-    constructor($location, dataService) {
-        this.$location = $location;
+    constructor(dataService) {
         this.dataService = dataService;
     }
 
@@ -12,5 +11,5 @@ class itemsController{
     }
 }
 
-itemsController.$inject = ['$location', 'dataService'];
+itemsController.$inject = ['dataService'];
 module.exports = itemsController;

@@ -1,29 +1,29 @@
 <div class="row">
     <div class="col-md-1">
-        <div id="smallImages" ng-repeat="img in itemDetail.imgs" ng-class="{'active': $index == current}" >
-            <img ng-src="{{img}}" alt="{{itemDetail.alt}}" ng-mouseover="DetailsCtrl.setCurrent($index)"/>
+        <div id="smallImages" ng-repeat="img in ctrl.itemDetail.imgs" ng-class="{'active': $index == ctrl.current}" >
+            <img ng-src="{{img}}" alt="{{ctrl.itemDetail.alt}}" ng-mouseover="ctrl.setCurrent($index)"/>
         </div>
     </div>
 
     <div class="col-md-6">
         <div id="product">
-            <img ng-src="{{itemDetail.imgs[current]}}" alt="{{itemDetail.alt}}" />
+            <img ng-src="{{ctrl.itemDetail.imgs[ctrl.current]}}" alt="{{ctrl.itemDetail.alt}}" />
         </div>
     </div>
 
     <div class="col-md-5">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h4 class="panel-title">{{itemDetail.name}}</h4>
+                <h4 class="panel-title">{{ctrl.itemDetail.name}}</h4>
             </div>
             <div class="panel-body" id="itemPanel">
-                <h4><b>Price: &nbsp;</b>{{itemDetail.price | currency: "€"}}</h4>
-                <h4><b>Brand: &nbsp;</b>{{itemDetail.brand}}</h4>
-                <h5><b>Color: &nbsp;</b>{{itemDetail.color}}</h5>
-                <div id="colors" ng-repeat="color in itemDetail.colors" style="background-color:{{color.color}}" ng-click="DetailsCtrl.changeDetailItem(color.id)" ng-class="{'active':itemDetail.id == color.id}">
+                <h4><b>Price: &nbsp;</b>{{ctrl.itemDetail.price | currency: "€"}}</h4>
+                <h4><b>Brand: &nbsp;</b>{{ctrl.itemDetail.brand}}</h4>
+                <h5><b>Color: &nbsp;</b>{{ctrl.itemDetail.color}}</h5>
+                <div id="colors" ng-repeat="color in ctrl.itemDetail.colors" style="background-color:{{color.color}}" ng-click="ctrl.changeDetailItem(color.id)" ng-class="{'active':ctrl.itemDetail.id == color.id}">
                 </div>
                 <h5>Size: </h5>
-                <div id="size" ng-repeat="size in itemDetail.size_full" ng-click="DetailsCtrl.select($index)" ng-class="{'active': $index == selected}">
+                <div id="size" ng-repeat="size in ctrl.itemDetail.size_full" ng-click="ctrl.select($index)" ng-class="{'active': $index == ctrl.selected}">
                     <p>{{size}}</p>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <h3 class="panel-title">Product info</h3>
             </div>
             <div class="panel-body" id="itemPanel">
-                {{itemDetail.info}}
+                {{ctrl.itemDetail.info}}
             </div>
         </div>
     </div>

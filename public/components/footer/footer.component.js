@@ -1,8 +1,7 @@
 'use strict';
 let footerComponent = {
     templateUrl: './components/footer/footer.html',
-    controller: 'MainCtrl',
-    controllerAs: 'MainCtrl'
+    controller: 'MainCtrl'
 };
 
 module.exports = footerComponent;

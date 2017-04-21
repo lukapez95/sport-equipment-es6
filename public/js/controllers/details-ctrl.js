@@ -2,32 +2,31 @@
 
 class DetailsCtrl {
 
-    constructor ($scope, $routeParams, $location, dataService) {
-        this.$scope = $scope;
+    constructor ($routeParams, $location, dataService) {
         this.$routeParams = $routeParams;
         this.$location = $location;
         this.dataService = dataService;
 
-        this.$scope.itemDetail = {};
+        this.itemDetail = {};
         this.setItemId();
 
-        $scope.current = 0;
-        $scope.selected = 0;
+        this.current = 0;
+        this.selected = 0;
     }
 
     setItemId () {
         return this.dataService.getItemById(this.$routeParams.id).then((item) => {
-            this.$scope.itemDetail = item.data;
-            return this.$scope.itemDetail;
+            this.itemDetail = item.data;
+            return this.itemDetail;
         })
     }
 
     setCurrent (index){
-        this.$scope.current = index || 0;
+        this.current = index || 0;
     }
 
     select (index){
-        this.$scope.selected = index;
+        this.selected = index;
     }
 
     changeDetailItem(id) {
@@ -36,5 +35,5 @@ class DetailsCtrl {
 
 }
 
-DetailsCtrl.$inject = ['$scope', '$routeParams', '$location', 'dataService'];
+DetailsCtrl.$inject = ['$routeParams', '$location', 'dataService'];
 module.exports = DetailsCtrl;

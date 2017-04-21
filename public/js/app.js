@@ -1,26 +1,27 @@
 const app = angular.module('myApp', [require('angular-route')]);
 
+
 app.config(function($routeProvider){
     $routeProvider
         .when('/', {
             templateUrl: 'views/main.html',
             controller: 'MainCtrl',
-            controllerAs: 'MainCtrl'
+            controllerAs: 'ctrl'
         })
         .when('/sports/:sportTitle', {
             templateUrl: 'views/sports.html',
             controller: 'MainCtrl',
-            controllerAs: 'MainCtrl'
+            controllerAs: 'ctrl'
         })
         .when('/contact',{
             templateUrl: 'views/contact.html',
             controller: 'MainCtrl',
-            controllerAs: 'MainCtrl'
+            controllerAs: 'ctrl'
         })
         .when('/details/:path/:id',{
             templateUrl: 'views/details.html',
             controller: 'DetailsCtrl',
-            controllerAs: 'DetailsCtrl'
+            controllerAs: 'ctrl'
         })
         .otherwise({
             redirectTo: '/'
@@ -35,3 +36,4 @@ app.controller('MainCtrl', require('./controllers/main-ctrl'))
     .component('navbarComponent', require('../components/nav-bar/nav-bar.component'))
     .component('itemsComponent', require('../components/items/items.component'))
     .component('footerComponent', require('../components/footer/footer.component'));
+
