@@ -11,7 +11,6 @@ class MainCtrl{
         this.allData = {};
         this.setData();
         this.sportTitle = $routeParams.sportTitle;
-
     }
 
 

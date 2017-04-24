@@ -11,7 +11,8 @@ class dataService{
         this.getItemById(id).then((item) => {
             let itemColor;
             let itemBrand = item.data.brand.split(' ').join('_');
-            item.data.color.indexOf(' ') >= 0 ?  itemColor = item.data.color.split(' ').join('_') : itemColor = item.data.color.split('/').join('_');
+            item.data.color.indexOf(' ') >= 0 ?  itemColor = item.data.color.split(' ').join('_') :
+                                                 itemColor = item.data.color.split('/').join('_');
             let itemName = `${itemBrand}_${item.data.name.split(' ').join('_')}_${itemColor}`;
             this.$location.url(`/details/${itemName}/${item.data.id}`);
         })
@@ -25,14 +26,13 @@ class dataService{
         return this.$http.get(`/api/item/${id}`);
     }
 
-
-    findInJsonById(data, id){
-        for(let i = 0; i < data.sports.length; i++) {
-            for(let j = 0; j < data.sports[i].categories.length; j++) {
-                for(let k = 0; k < data.sports[i].categories[j].subCategories.length; k++) {
-                    for(let l = 0; l < data.sports[i].categories[j].subCategories[k].items.length; l++) {
-                        if(data.sports[i].categories[j].subCategories[k].items[l].id === id)
-                            return data.sports[i].categories[j].subCategories[k].items[l];
+    
+    static findInJsonById(data, id){
+        for(let sport of data.sports) {
+            for(let category of sport.categories) {
+                for(let subCategory of category.subCategories) {
+                    for(let item of subCategory.items) {
+                        if(item.id === id) return item;
                     }
                 }
             }

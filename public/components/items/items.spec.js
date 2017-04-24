@@ -16,7 +16,7 @@ describe('items controller', function () {
         this.controller.goToDetails(item);
     }));
 
-    it('should hvae been called with item object', function () {
+    it('should have been called with item object', function () {
         expect(this.controller.goToDetails).toHaveBeenCalled();
         expect(this.controller.goToDetails).toHaveBeenCalledWith(item);
     });
